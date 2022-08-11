@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+  font-family: calibri, sans-serif;
+  background-color: rgb(209, 221, 230);
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+
+    * {
+      margin: 1em 0 1em 0;
+    }
+
+    hr.solid {
+      border-top: 1px solid rgb(117, 117, 117);
+      width: 20rem;
+      margin-bottom: -1rem;
+    }
+
+    h3 {
+      margin-top: 2em;
+      margin-bottom: 0em;
+    }
+    #data {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      label {
+        display: inline-block;
+      }
+      input {
+        display: inline-block;
+        padding-left: 5em;
+      }
+    }
+    #key {
+      input {
+        width: 30rem;
+      }
+    }
+    button {
+      width: 7em;
+      margin: 0 1em;
+      display: inline-block;
+      font-size: 1rem;
+    }
+  }
+}

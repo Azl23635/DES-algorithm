@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script type="module" src="runDes.mjs"></script>
+  <script type="module" src="des.mjs"></script>
+  <script type="module" src="key.mjs"></script>
+  <script type="module" src="feistel.mjs"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Encrypt/Decypt DES</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>DES Encrypt/Decrypt</h1>
+      <div id="data">
+        <label for="text"
+          >Upload text file with plaintext/ciphertext data (64 bits or
+          less)</label
+        >
+        <input type="file" name="text" id="text" />
+      </div>
+      <div id="key">
+        <input
+          type="text"
+          id="hex-key"
+          placeholder="Enter 64 bit hexadecimal key here..."
+        />
+      </div>
+      <div class="btn">
+        <button id="encrypt-btn">Encrypt</button>
+        <button id="decrypt-btn">Decrypt</button>
+      </div>
+      <hr class="solid" />
+      <h3 id="output-label"></h3>
+      <p class="output" id="output"></p>
+    </div>
+  </body>
+</html>
