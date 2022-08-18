@@ -1,4 +1,5 @@
 export default class Feistel {
+  //Substitution box for the fuction
   static sBoxLookup = [
     [
       [14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7],
@@ -59,42 +60,50 @@ export default class Feistel {
 
   static #one_expansion = (input32) => {
     let expOutput48 = '';
+    //Lookup table for expansion
     const expansionLookup = [
       32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, 10, 11, 12, 13, 12,
       13, 14, 15, 16, 17, 16, 17, 18, 19, 20, 21, 20, 21, 22, 23, 24,
       25, 24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32, 1,
     ];
+    //Order bits according to table
     for (let i = 0; i < expansionLookup.length; i++) {
       expOutput48 += input32[expansionLookup[i] - 1];
     }
+    //Return result
     return expOutput48;
   };
 
   static #two_XOR = (input48, roundKey48) => {
     let xorOutput48 = '';
+    //Simple XOR
     for (let i = 0; i < input48.length; i++) {
       input48[i] !== roundKey48[i]
         ? (xorOutput48 += '1')
         : (xorOutput48 += '0');
     }
+    //Return XOR result
     return xorOutput48;
   };
 
   static #three_sBox = (xor48) => {
     const sboxOut = [];
     const xorDivided = [];
+    //Divide into 6 bit blocks, FORMAT: [bitsAll, bitsInner, bitsOuter]
     for (let i = 0; i < 8; i++) {
       xorDivided.push([xor48.slice(6 * i, 6 * i + 6)]);
       xorDivided[i].push(
         xorDivided[i][0].slice(1, -1),
         xorDivided[i][0].charAt(0) + xorDivided[i][0].charAt(5)
       );
+      //Lookup output for the block
       sboxOut.push(
         this.sBoxLookup[i][parseInt(xorDivided[i][2], 2)][
           parseInt(xorDivided[i][1], 2)
         ]
       );
     }
+    //Convert to binary, pad to 4 bits
     const sboxOutBinArr = sboxOut.map((elem) => elem.toString(2));
     sboxOutBinArr.forEach((elem, ind) =>
       elem.length < 4
@@ -102,21 +111,26 @@ export default class Feistel {
         : null
     );
     let sboxOutStr = sboxOutBinArr.join('');
+    //Return result
     return sboxOutStr;
   };
 
   static #four_permutation = (perm32) => {
     let permOutput = '';
+    //Lookup table for permutation
     const permLookup = [
       16, 7, 20, 21, 29, 12, 28, 17, 1, 15, 23, 26, 5, 18, 31, 10, 2,
       8, 24, 14, 32, 27, 3, 9, 19, 13, 30, 6, 22, 11, 4, 25,
     ];
+    //Order bits according to table
     for (let i = 0; i < permLookup.length; i++) {
       permOutput += perm32[permLookup[i] - 1];
     }
+    //Return result
     return permOutput;
   };
 
+  //Top level function/ how module is accessed
   static fboxOut = (inData32, inKey48) =>
     this.#four_permutation(
       this.#three_sBox(
