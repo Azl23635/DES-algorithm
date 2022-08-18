@@ -1,5 +1,5 @@
 # Simple DES encryption/decryption
 A simple DES encryption/decryption algorithm
 
-Plaintext and Ciphertext must be 64 bits or less, in hexadecimal format.
+Plaintext and Ciphertext must be 64 bits or less, in hexadecimal format.<br/>
 Key must be exactly 64 bits in hexadecimal format.
