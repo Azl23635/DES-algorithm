@@ -74,7 +74,7 @@ export default class Des {
         right = prevRight;
       }
     }
-    //Final permute the data, return result
+    //Final permutate the data, return result
     return this.#binToHex(this.#three_finalPermute(left + right));
   };
 
@@ -105,7 +105,7 @@ export default class Des {
         left = prevLeft;
       }
     }
-    //Final permute the data, return result
+    //Final permutate the data, return result
     return this.#binToHex(this.#three_finalPermute(right + left));
   };
   //Pads input if not 64 bit
